@@ -123,7 +123,7 @@ def boxInPreviousFrames(previous_frame_detections, current_box, current_detectio
 
 def count_vehicles(idxs, boxes, classIDs, vehicle_count, previous_frame_detections, frame, LABELS, data):
 	import cv2
-
+	list_of_vehicles = ["bicycle", "car", "motorbike", "bus", "truck", "train"]
 	current_detections = {}
 	# ensure at least one detection exists
 	if len(idxs) > 0:
@@ -304,9 +304,9 @@ def Traffic_analyser(filename="testset/bridge.mp4"):
 		vehicles_in_frame = len(idxs)
 		if(vehicles_in_frame>maxVehicleInFrame):
 			maxVehicleInFrame = vehicles_in_frame
-		# Display Vehicle Count if a vehicle has passed the line 
+		# Display Vehicle Count if a vehicle has passed the line
 		displayVehicleCount(frame, vehicle_count)
-		displayVehicleinFrameCount(frame, vehicles_in_frame)
+		#displayVehicleinFrameCount(frame, vehicles_in_frame)
 
 		# write the output frame to disk
 		writer.write(frame)
