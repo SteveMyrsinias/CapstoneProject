@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <title>Vehicle Recognition System</title>
+  </head>
+  <body>
+    <div class="Banner">
+      <h1>Vehicle Recognition System</h1>
+    </div>
+    <div class="Main">
+
+
+    <div class="ib">
+      <div class="video1">
+        <img id="frame" src="{{ url_for('feed')}}" />
+      </div>
+
+    </div>
+      <div class="btns">
+        <a href="{{ url_for('uploader') }}"
+          ><button class="btn">STOP</button></a
+        >
+      </div>
+    <div class="ic">
+      <div class="video2">
+        <img id="frame2" src="{{ url_for('feed2')}}" />
+      </div>
+</div>
+        </div>
+    <script src="{{ url_for('static', filename='js/myjs.js')}}"></script>
+  </body>
+</html>
