@@ -30,20 +30,10 @@ def home():
 def feed():
     return Response(Traffic_analyser(session['filename']), mimetype="multipart/x-mixed-replace; boundary=frame")
 
-
-# @app.route('/feed2')
-# def feed2():
-#     return Response(plateRecognition(model_name='ALPR/best.pt',filename=session['filename']), mimetype="multipart/x-mixed-replace; boundary=frame")
 @app.route('/feed2')
 def feed2():
     return Response(test(model_name='ALPR/best.pt', filename=session['filename']),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
-
-
-# def getVideo():
-#     video = session['filename']
-#     return video
-
 
 @app.route('/', methods=["POST", "GET"])
 def uploader():
