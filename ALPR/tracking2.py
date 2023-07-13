@@ -98,7 +98,7 @@ def plot_boxes( results, frame, c, classes):
 
     return frame, c
 
-def test(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\best.pt',filename="C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\IMG_8716.mp4"):
+def licencePlateDetection(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\best.pt',filename="C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\IMG_8716.mp4"):
     """
     This function is called when class is executed, it runs the loop to read the video frame by frame,
     and write the output into a new file.
@@ -160,4 +160,4 @@ def test(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\
     cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-    test()
+    licencePlateDetection()

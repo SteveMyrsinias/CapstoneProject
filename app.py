@@ -5,7 +5,7 @@ import cv2
 import base64
 from src.yolo_video import Traffic_analyser
 from ALPR.main import main
-from ALPR.tracking2 import test
+from ALPR.tracking2 import licencePlateDetection
 import numpy as np
 import json
 from src.input_retrieval import *
@@ -32,7 +32,7 @@ def feed():
 
 @app.route('/feed2')
 def feed2():
-    return Response(test(model_name='ALPR/best.pt', filename=session['filename']),
+    return Response(licencePlateDetection(model_name='ALPR/best.pt', filename=session['filename']),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route('/', methods=["POST", "GET"])
