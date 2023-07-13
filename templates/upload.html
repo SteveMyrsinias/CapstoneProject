@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <title>Vehicle Recognition System</title>
+
+<!-- Include this CDN for using icons     -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+    <!-- header section starts  -->
+
+
+   <!-- header section starts  -->
+
+    <header>
+
+        <section class="nav">
+            <!-- We can also insert any logo here     -->
+
+            <!-- We can also insert any logo here     -->
+            <div class="logo">
+                <a href=""><i class="fas fa-video"></i><i class="fas fa-car-side fa-flip-horizontal"></i>Vehicle Recognition System</a>
+            </div>
+
+            <!--  checkbox to control the icon's state    -->
+            <input id="menu-toggle" type="checkbox" />
+            <label class='menu-button-container' for="menu-toggle">
+                <div class='menu-button'></div>
+              </label>
+
+        </section>
+
+
+
+
+    </header>
+
+<body>
+    <div class="uploader">
+        <h1> Upload your video here</h1>
+        <form action="" method = "POST" enctype = "multipart/form-data">
+            <input type="file" name="file">
+            <button type="submit"> Submit </button>
+        </form>
+
+        <div>
+            <h4>Summary for last session:</h4>
+            <table>
+                <tr><th>RunTime</th> <th>{{ summary["Total Time"]}}</th></tr>
+                <tr><th>Total Vehicles</th> <th>{{ summary["Total Vehicles"]}}</th></tr>
+                <!--<tr><th>Average Vehicles/sec</th> <th>{{ summary["Average Vehicles/sec"]}}</th></tr>-->
+                <!--<tr><th>Max Vehicles in frame/sec</th> <th>{{ summary["Max Vehicles in frame/sec"]}}</th></tr>-->
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

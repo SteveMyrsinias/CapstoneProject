@@ -1,0 +1,107 @@
+ @import url("https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&display=swap");
+    * {
+        font-family: "Nunito", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        text-transform: capitalize;
+        transition: all 0.2s linear;
+    }
+
+    html {
+        font-size: 62.5%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #212531;
+        margin: 0;
+    }
+
+    header {
+        margin: 0px;
+    }
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+/* styling the logo  */
+
+    .logo {
+        font-size: 2.5rem;
+        font-weight: bolder;
+        color: #666;
+        display: inline-block;
+    }
+
+    .logo i {
+        padding-right: 2rem;
+        color: black;
+    }
+
+
+/* Stying the navbar container */
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background: white;
+        color: black;
+        height: 65px;
+        padding: 1em;
+        font-size: 25px;
+    }
+
+
+    #menu-toggle {
+        display: none;
+    }
+
+
+ input {
+  color: white;
+  background-color: rgb(123, 12, 214);
+  border: 2px solid black;
+}
+span {
+  color: black;
+  /* text-align: center; */
+}
+button {
+  margin: 1rem 0;
+  color: #ffffff;
+  background-color: rgb(123, 12, 214);
+  border: 2px solid black;
+  width: auto;
+  height: auto;
+  font-size: 14px;
+}
+button:hover {
+  margin: 1rem 0;
+  color: #ffffff;
+  background-color: rgb(238, 11, 11);
+  border: 2px solid black;
+  width: auto;
+  height: auto;
+  font-size: 14px;
+}
+.uploader {
+  position: absolute;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  color: white;
+    font-size: 20px;
+}
