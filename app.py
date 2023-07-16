@@ -4,12 +4,11 @@ from markupsafe import escape
 import cv2
 import base64
 from src.yolo_video import Traffic_analyser
-from ALPR.main import main
 from ALPR.tracking2 import licencePlateDetection
 import numpy as np
 import json
 from src.input_retrieval import *
-from flask_ngrok import run_with_ngrok
+
 
 
 app = Flask(__name__)
@@ -57,5 +56,4 @@ def uploader():
 if __name__ == '__main__':
     from src.input_retrieval import *
 
-    run_with_ngrok(app)
     socketio.run(app, port=4000, debug=True, allow_unsafe_werkzeug=True)

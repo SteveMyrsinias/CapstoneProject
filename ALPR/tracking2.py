@@ -3,8 +3,6 @@ import numpy as np
 import cv2
 from time import time
 from ALPR import ocr
-import app
-
 
 
 def get_video_capture(filename):
@@ -15,7 +13,8 @@ def get_video_capture(filename):
 
     return cv2.VideoCapture(filename)
 
-def load_model( model_name):
+
+def load_model(model_name):
     """
     Loads Yolo5 model from pytorch hub.
     :return: Trained Pytorch model.
@@ -26,7 +25,8 @@ def load_model( model_name):
         model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
     return model
 
-def score_frame( frame,model,device):
+
+def score_frame(frame, model, device):
     """
     Takes a single frame as input, and scores the frame using yolo5 model.
     :param frame: input frame in numpy/list/tuple format.
@@ -38,7 +38,8 @@ def score_frame( frame,model,device):
     labels, cord = results.xyxyn[0][:, -1], results.xyxyn[0][:, :-1]
     return labels, cord
 
-def class_to_label(x,classes):
+
+def class_to_label(x, classes):
     """
     For a given label value, return corresponding string label.
     :param x: numeric label
@@ -46,7 +47,8 @@ def class_to_label(x,classes):
     """
     return classes[int(x)]
 
-def createPadding( src, top, bottom, left, right):
+
+def createPadding(src, top, bottom, left, right):
     '''
     will alter each frame to add padding to the left so there is constant space for plate ocr
     used to avoid flickering
@@ -63,7 +65,8 @@ def createPadding( src, top, bottom, left, right):
                                 )
     return padded
 
-def plot_boxes( results, frame, c, classes):
+
+def plot_boxes(results, frame, c, classes):
     """
     Takes a frame and its results as input, and plots the bounding boxes and label on to the frame.
     :param results: contains labels and coordinates predicted by model on the given frame.
@@ -82,13 +85,13 @@ def plot_boxes( results, frame, c, classes):
                     row[3] * y_shape + 10)
                 bgr = (0, 0, 255)
                 cv2.rectangle(frame, (x1, y1), (x2, y2), bgr, 1)
-                cv2.putText(frame, class_to_label(labels[i],classes), (x1, y1), cv2.FONT_HERSHEY_TRIPLEX, 0.9, bgr, 2)
+                cv2.putText(frame, class_to_label(labels[i], classes), (x1, y1), cv2.FONT_HERSHEY_TRIPLEX, 0.9, bgr, 2)
                 cropped = frame[y1:y2, x1:x2]
 
                 ocr_results = ocr.main(cropped, c)
 
                 ocr_results = createPadding(ocr_results, 0, frame.shape[0] - ocr_results.shape[0], 0,
-                                                 656 - ocr_results.shape[1])
+                                            656 - ocr_results.shape[1])
                 frame = np.hstack((frame, ocr_results))
                 c += 1
             else:
@@ -98,7 +101,10 @@ def plot_boxes( results, frame, c, classes):
 
     return frame, c
 
-def licencePlateDetection(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\best.pt',filename="C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\IMG_8716.mp4"):
+
+def licencePlateDetection(
+        model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\best.pt',
+        filename="C:\\Users\\MyrsiniasS\\OneDrive - Titan Cement Company SA\\Desktop\\pythonProject\\Traffic_monitor\\ALPR\\IMG_8716.mp4"):
     """
     This function is called when class is executed, it runs the loop to read the video frame by frame,
     and write the output into a new file.
@@ -114,12 +120,12 @@ def licencePlateDetection(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Ce
 
     # videolink = app.getVideo()
     cap = video
-    #print(videolink)
+    # print(videolink)
 
     c = 0
     i = 0
     gif = []
-    #print("Checkpoint")
+    # print("Checkpoint")
     while True:
         i += 1
         try:
@@ -136,9 +142,9 @@ def licencePlateDetection(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Ce
         frame = ocr.resize(frame, 50)
 
         start_time = time()
-        results = score_frame(frame,model,device)
+        results = score_frame(frame, model, device)
 
-        frame, c = plot_boxes(results, frame, c,classes)
+        frame, c = plot_boxes(results, frame, c, classes)
 
         end_time = time()
         fps = 1 / np.round(end_time - start_time, 2)
@@ -158,6 +164,7 @@ def licencePlateDetection(model_name='C:\\Users\\MyrsiniasS\\OneDrive - Titan Ce
 
     cap.release()
     cv2.destroyAllWindows()
+
 
 if __name__ == '__main__':
     licencePlateDetection()
