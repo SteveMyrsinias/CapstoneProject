@@ -9,12 +9,13 @@ from ALPR.tracking2 import licencePlateDetection
 import numpy as np
 import json
 from src.input_retrieval import *
+from flask_ngrok import run_with_ngrok
+
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-Upload_dir = "testset"
+upload_folder = "testset"
 app.secret_key = "RandomString123"
-Upload_dir = 'testset/'
 app.config["SESSION_PERMANENT"] = False
 
 
@@ -40,11 +41,11 @@ def uploader():
     if request.method == "POST":
         f = request.files['file']
         if (f):
-            filename = os.path.join(Upload_dir, f.filename)
+            filename = os.path.join(upload_folder, f.filename)
             session["filename"] = filename
             f.save(filename)
         else:
-            session["filename"] = os.path.join(Upload_dir, "bridge.mp4")
+            session["filename"] = os.path.join(upload_folder, "bridge.mp4")
         return redirect(url_for('home'))
 
     with open("log.json", "r+") as f:
@@ -56,4 +57,5 @@ def uploader():
 if __name__ == '__main__':
     from src.input_retrieval import *
 
+    run_with_ngrok(app)
     socketio.run(app, port=4000, debug=True, allow_unsafe_werkzeug=True)
