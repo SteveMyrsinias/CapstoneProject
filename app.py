@@ -3,17 +3,15 @@ from flask_socketio import SocketIO, emit
 from markupsafe import escape
 import cv2
 import base64
-from src.yolo_video import Traffic_analyser
-from ALPR.tracking2 import licencePlateDetection
+from src.vehicle_detection import traffic_analyser
+from ALPR.tracking import licencePlateDetection
 import numpy as np
 import json
-from src.input_retrieval import *
-
-
+import os
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-upload_folder = "testset"
+upload_folder = "Uploaded Videos"
 app.secret_key = "RandomString123"
 app.config["SESSION_PERMANENT"] = False
 
@@ -28,18 +26,20 @@ def home():
 
 @app.route('/feed')
 def feed():
-    return Response(Traffic_analyser(session['filename']), mimetype="multipart/x-mixed-replace; boundary=frame")
+    return Response(traffic_analyser(session['filename']), mimetype="multipart/x-mixed-replace; boundary=frame")
+
 
 @app.route('/feed2')
 def feed2():
     return Response(licencePlateDetection(model_name='ALPR/best.pt', filename=session['filename']),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
 
+
 @app.route('/', methods=["POST", "GET"])
 def uploader():
     if request.method == "POST":
         f = request.files['file']
-        if (f):
+        if f:
             filename = os.path.join(upload_folder, f.filename)
             session["filename"] = filename
             f.save(filename)
@@ -54,6 +54,4 @@ def uploader():
 
 
 if __name__ == '__main__':
-    from src.input_retrieval import *
-
     socketio.run(app, port=4000, debug=True, allow_unsafe_werkzeug=True)

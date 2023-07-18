@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../static/css/styles.css">
-    <title>Vehicle Recognition System</title>
+    <title>A-VLPRA</title>
 
 <!-- Include this CDN for using icons     -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -26,7 +26,7 @@
 
             <!-- We can also insert any logo here     -->
             <div class="logo">
-                <a href=""><i class="fas fa-video"></i><i class="fas fa-car-side fa-flip-horizontal"></i>Vehicle Recognition System</a>
+                <a href=""><i class="fas fa-video"></i><i class="fas fa-car-side fa-flip-horizontal"></i>A-VLPRA</a>
             </div>
 
             <!--  checkbox to control the icon's state    -->
@@ -53,10 +53,8 @@
         <div>
             <h4>Summary for last session:</h4>
             <table>
-                <tr><th>RunTime</th> <th>{{ summary["Total Time"]}}</th></tr>
-                <tr><th>Total Vehicles</th> <th>{{ summary["Total Vehicles"]}}</th></tr>
-                <!--<tr><th>Average Vehicles/sec</th> <th>{{ summary["Average Vehicles/sec"]}}</th></tr>-->
-                <!--<tr><th>Max Vehicles in frame/sec</th> <th>{{ summary["Max Vehicles in frame/sec"]}}</th></tr>-->
+                <tr><th>Runtime in Seconds: </th> <th>{{ summary["Total Time"]}}</th></tr>
+                <tr><th>Total Vehicles Detected: </th> <th>{{ summary["Total Vehicles"]}}</th></tr>
             </table>
         </div>
     </div>

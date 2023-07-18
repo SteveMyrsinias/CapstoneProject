@@ -1,9 +1,9 @@
 {
-    "yolo_video":{
+    "vehicle_detection":{
         "list_of_vehicles": ["bicycle","car","motorbike","bus","truck"],
-        "FRAMES_BEFORE_CURRENT":10 ,
-        "inputWidth":416,
-        "inputHeight":416
+        "frames_before_current":10 ,
+        "input_width":416,
+        "input_height":416
     },
     "args":{
         "yolo":"yolo-coco",

@@ -1,27 +1,29 @@
 import re
+from collections import Counter
+
+
+def find_most_frequent_words(word_list, n):
+    word_counter = Counter(word_list)
+    most_common = word_counter.most_common(n)
+    return most_common
+
 
 def find_frequency():
     file = open("ALPR\Results\Recognized.txt", "r")
-    frequent_lplate = ""
-    frequency = 0
     words = []
     for line in file:
         line_word = re.findall('[a-zA-Z][a-zA-Z][a-zA-Z]\s\d\d\d\d',line)
         for w in line_word:
             words.append(w)
-
-    for i in range(0, len(words)):
-        count = 1
-        for j in range(i + 1, len(words)):
-            if (words[i] == words[j]):
-                count = count + 1
-
-        if (count > frequency):
-            frequency = count
-            frequent_lplate = words[i]
-
-    print("Most repeated Plate: " + frequent_lplate)
-    print("Frequency: " + str(frequency))
     file.close()
-    return frequent_lplate
 
+    most_frequent = find_most_frequent_words(words, 5)
+
+    with open("plates.txt", 'w') as file:
+        for word, count in most_frequent:
+            file.write(f'{word}: {count}\n')
+
+
+    print("Most Repeated Plates: ")
+    for word, count in most_frequent:
+        print(f'{word}: {count}')
