@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 from markupsafe import escape
 import cv2
 import base64
-from src.vehicle_detection import traffic_analyser
+from AVRA.vehicle_detection import traffic_analyser
 from ALPR.tracking import licencePlateDetection
 import numpy as np
 import json
