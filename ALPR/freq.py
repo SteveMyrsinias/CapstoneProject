@@ -12,7 +12,7 @@ def find_frequency():
     file = open("ALPR\Results\Recognized.txt", "r")
     words = []
     for line in file:
-        line_word = re.findall('[a-zA-Z][a-zA-Z][a-zA-Z]\s\d\d\d\d',line)
+        line_word = re.findall('[a-zA-Z][a-zA-Z][a-zA-Z]\s\d\d\d\d', line)
         for w in line_word:
             words.append(w)
     file.close()
@@ -22,7 +22,6 @@ def find_frequency():
     with open("plates.txt", 'w') as file:
         for word, count in most_frequent:
             file.write(f'{word}: {count}\n')
-
 
     print("Most Repeated Plates: ")
     for word, count in most_frequent:

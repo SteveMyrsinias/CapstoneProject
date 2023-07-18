@@ -304,9 +304,11 @@ def traffic_analyser(filename="Uploaded Videos/bridge.mp4"):
         previous_frame_detections.pop(0)  # Removing the first frame from the list
         previous_frame_detections.append(current_detections)
         end_time = int(time.time())
+        pd = open("plates.txt", "r")
         summary = {}
         summary["Total Time"] = (end_time - start_time)
         summary["Total Vehicles"] = vehicle_count
+        summary["Plates Detected"] = pd.read()
         with open("log.json", "w+") as f:
             json.dump(summary, f)
 
