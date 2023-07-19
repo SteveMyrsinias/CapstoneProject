@@ -220,7 +220,6 @@ def traffic_analyser(filename="Uploaded Videos/bridge.mp4"):
         boxes, confidences, class_ids = [], [], []
         # vehicles_in_frame = 0
         # Calculating fps each second
-        # start_time, num_frames = displayFPS(start_time, num_frames)
         # read the next frame from the file
         (grabbed, frame) = video_stream.read()
 

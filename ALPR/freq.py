@@ -23,6 +23,6 @@ def find_frequency():
         for word, count in most_frequent:
             file.write(f'{word}: {count}\n')
 
-    print("Most Repeated Plates: ")
+    print("Most repeated Plates: ")
     for word, count in most_frequent:
         print(f'{word}: {count}')

@@ -1,3 +1,8 @@
+'''
+https://www.geeksforgeeks.org/text-detection-and-extraction-using-opencv-and-ocr/ original inspiration
+https://pyimagesearch.com/2021/02/22/opencv-connected-component-labeling-and-analysis/ for component analysis
+https://stackoverflow.com/questions/72381645/python-tesseract-license-plate-recognition for easyocr
+'''
 import cv2
 import numpy as np
 import os
@@ -25,23 +30,17 @@ def examineComponents(TotalComponents, labels, stats, centroids, img, thresh):
     character_dimensions = (0.35 * img.shape[0], 0.60 * img.shape[0], 0.05 * img.shape[1], 0.15 * img.shape[1])
     min_height, max_height, min_width, max_width = character_dimensions
     characters = []
-    # gif = []
+    gif = []
     for i in range(0, TotalComponents):
-        # if this is the first component then we examine the
-        # *background* (typically we would just ignore this
-        # component in our loop)
 
         x = stats[i, cv2.CC_STAT_LEFT]
         y = stats[i, cv2.CC_STAT_TOP]
         w = stats[i, cv2.CC_STAT_WIDTH]
         h = stats[i, cv2.CC_STAT_HEIGHT]
-        area = stats[i, cv2.CC_STAT_AREA]
-        (cX, cY) = centroids[i]
 
         if h > min_height and h < max_height and w > min_width and w < max_width:
             roi = img[y:y + h, x:x + w]
             cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 1)
-            # resized_char = resize(roi, (20, 20))
             characters.append(roi)
             componentMask = (labels == i).astype("uint8") * 255
             mask = cv2.bitwise_or(mask, componentMask)
@@ -74,11 +73,6 @@ def writeResults(result, path):
             print('No license number characters were identified')
 
 
-def ocr(path, reader):
-    results = reader.readtext(path)
-    return results
-
-
 def resize(img, scale):
     width = int(img.shape[1] * scale / 100)
     height = int(img.shape[0] * scale / 100)
@@ -86,12 +80,6 @@ def resize(img, scale):
     # resize image
     resized = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
     return resized
-
-
-def findLicenses(reader):
-    for i in range(len(os.listdir('ALPR\Results\TrackedPlates'))):
-        result = ocr(f'ALPR\Results\TrackedPlates\Tracked{i}.jpg', reader)
-        writeResults(result, 'ALPR\Results\Recognized.txt')
 
 
 def cleandir():
@@ -130,9 +118,3 @@ def main(img, c=0):
 
     print('done')
     return mask
-
-
-if __name__ == '__main__':
-    print(datetime.now())
-    main()
-    print(datetime.now())

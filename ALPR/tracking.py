@@ -89,6 +89,11 @@ def plot_boxes(results, frame, c, reader):
                     row[3] * y_shape + 10)
                 bgr = (0, 0, 255)
 
+                if x1 < 0:
+                    x1 = 0
+                if y1 < 0:
+                    y1 = 0
+
                 # crop the original picture and keep only the license plate
                 cropped = frame[y1:y2, x1:x2]
                 # run the license plate image through the OCR and get the black and white mask/results back
